@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,11 +15,6 @@
    <children>
       <AnchorPane layoutX="200.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="802.0" style="-fx-background-color: #5757e4; -fx-border-color: BLACK;">
          <children>
-            <Button layoutX="950.0" layoutY="7.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="45.0" style="-fx-border-color: #5757e4; -fx-background-color: #5757e4;" text="x" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Calibri Bold" size="20.0" />
-               </font>
-            </Button>
             <Label layoutX="239.0" layoutY="7.0" text="Book Shop Parthenope" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="34.0" />
@@ -59,11 +57,42 @@
       </AnchorPane>
       <AnchorPane layoutX="200.0" layoutY="52.0" prefHeight="631.0" prefWidth="802.0">
          <children>
-            <Button layoutX="345.0" layoutY="546.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #fbb13c; -fx-border-color: BLACK;" stylesheets="@fxcss.css" text="Acquista">
+            <Button layoutX="653.0" layoutY="550.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #fbb13c; -fx-border-color: BLACK;" stylesheets="@fxcss.css" text="Acquista">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Button>
+            <TableView prefHeight="632.0" prefWidth="411.0" />
+            <ComboBox layoutX="533.0" layoutY="442.0" prefWidth="223.0" promptText="Metodo di Pagamento" stylesheets="@fxcss.css" />
+            <Label layoutX="709.0" layoutY="479.0" text="Totale:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="689.0" layoutY="507.0" prefHeight="27.0" prefWidth="54.0" text="1234">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="752.0" layoutY="507.0" prefHeight="35.0" prefWidth="22.0" text="€">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="533.0" layoutY="384.0" prefHeight="26.0" prefWidth="174.0" promptText="Via" stylesheets="@fxcss.css" />
+            <TextField layoutX="533.0" layoutY="344.0" prefHeight="26.0" prefWidth="223.0" promptText="Regione" stylesheets="@fxcss.css" />
+            <TextField layoutX="714.0" layoutY="384.0" prefHeight="26.0" prefWidth="43.0" promptText="Nr." stylesheets="@fxcss.css" />
+            <ComboBox layoutX="690.0" layoutY="40.0" prefHeight="26.0" prefWidth="61.0" promptText="1" />
+            <Label fx:id="titoloLibro" alignment="CENTER_RIGHT" layoutX="418.0" layoutY="44.0" prefHeight="20.0" prefWidth="261.0" text="Titololibro">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="551.0" layoutY="302.0" prefHeight="27.0" prefWidth="186.0" text="Indirizzo di Spedizione">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

@@ -4,11 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class CartController {
 
+
+
+    @FXML
+    private Label titoloLibro;
     @FXML
     private Button homeButton;
 

@@ -30,8 +30,9 @@ public class HomeController implements Initializable {
     private TableView<ObservableList> tableBook;
 
     @FXML
-    private Label dettagioAnno;
-
+    private Label dettaglioAnno;
+    @FXML
+    private Label dettaglioTitolo;
     @FXML
     private Label dettaglioAutore;
 
@@ -46,6 +47,8 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label dettaglioQuantita;
+    @FXML
+    private Label dettaglioIsbn;
     @FXML
     private AnchorPane dettagli;
 
@@ -147,6 +150,7 @@ public class HomeController implements Initializable {
 
             }
 
+
             tableBook.setItems(data);
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -156,7 +160,28 @@ public class HomeController implements Initializable {
             System.out.println("non sono presenti libri " + scat);
         }
 
+        tableBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                String bookTitle = (String) newSelection.get(0);
+                try {
+                    ResultSet dettagliLibro= DBService.showBooksDetails(bookTitle);
+                    dettagli.setVisible(true);
+                    dettaglioTitolo.setText(dettagliLibro.getString(1));
+                    dettaglioAutore.setText(dettagliLibro.getString(2));
+                    dettaglioIsbn.setText(dettagliLibro.getString(3));
+                    dettaglioPrezzo.setText(dettagliLibro.getString(4));
+                    dettaglioQuantita.setText(dettagliLibro.getString(5));
+                    dettaglioDescrizione.setText(dettagliLibro.getString(6));
+                    dettaglioAnno.setText(dettagliLibro.getString(7));
+                    dettaglioPagine.setText(dettagliLibro.getString(8));
 
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
     }
 
@@ -273,16 +298,6 @@ public class HomeController implements Initializable {
 
 
 
-
-    @FXML
-    public void clickItem(MouseEvent event)
-    {
-        if (event.getClickCount() == 2) //Checking double click
-        {
-            dettagioAnno.setText("aaa");
-            dettagli.setVisible(true);
-        }
-    }
 
 
 

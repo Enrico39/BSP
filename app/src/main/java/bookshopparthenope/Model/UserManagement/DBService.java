@@ -105,7 +105,7 @@ public class DBService {
         Connection conn = DriverManager.getConnection(myUrl, "root", "");
         String apice = "'";
         String virgola = ",";
-        String query = "SELECT titolo,ISBN,autore,ANNO_PUBBLICAZIONE,NUM_PAGINE,CATEGORIA,SOTTOCATEGORIA,PREZZO,QTA_DISP from Libro where not AUTORE='A'";
+        String query = "SELECT titolo,ISBN,autore,ANNO_PUBBLICAZIONE,NUM_PAGINE,CATEGORIA,SOTTOCATEGORIA,PREZZO,QTA_DISP from Libro where not AUTORE='A'ORDER BY TITOLO";
         Statement st = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);
         ResultSet rs = st.executeQuery(query);
@@ -114,4 +114,47 @@ public class DBService {
         } else return null;
     }
 
+
+
+
+
+
+
+
+
+
+
+    public static ResultSet showBooksDetails(String titolo) throws SQLException, ClassNotFoundException {
+        String myDriver = "com.mysql.cj.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/bsv2";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String apice = "'";
+        String virgola = ",";
+        String query = "SELECT titolo,autore,isbn,PREZZO,QTA_DISP,descrizione,anno_pubblicazione,Num_pagine from Libro where titolo=" +
+                apice + titolo + apice;
+
+        Statement st = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
+        ResultSet rs = st.executeQuery(query);
+        if (rs.next()) {
+            return rs;
+        } else return null;
+    }
+
+
+    public static void eliminaLibro(String bookTitle) throws SQLException, ClassNotFoundException {
+
+        String myDriver = "com.mysql.cj.jdbc.Driver";
+        String myUrl = "jdbc:mysql://localhost:3306/bsv2";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "root", "");
+        String apice = "'";
+        String virgola = ",";
+        String query = "DELETE FROM libro WHERE titolo = '"+bookTitle.replace("'", "''")+apice;
+
+
+        conn.prepareStatement(query).execute();
+
+    }
 }

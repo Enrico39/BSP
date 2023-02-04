@@ -89,11 +89,12 @@ public class AdminPanelController  implements Initializable {
             for (int i = 0; i <  rs.getMetaData().getColumnCount();  i++) {
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1).toUpperCase());
-                col.setResizable(false);
-                if (i==0 || i==1){
-                    col.setPrefWidth(140);}
+
+
+                if (i==0){
+                    col.setPrefWidth(200);}
                 else
-                    col.setPrefWidth(80);
+                    col.setPrefWidth(100);
                 col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
                     public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
                         return new SimpleStringProperty(param.getValue().get(j).toString());
@@ -139,8 +140,45 @@ public class AdminPanelController  implements Initializable {
             System.out.println("non sono presenti libri " );
         }
 
+        adminTableBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                bookTitle = (String) newSelection.get(0);
 
+            }
+        });
 }
+    @FXML
+    private Label errorLabel;
+
+String bookTitle;
+
+    @FXML
+    void deleteBook(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (bookTitle==null){
+            System.out.println("seleziona prima un libro");
+            errorLabel.setVisible(true);
+        }
+        else{DBService.eliminaLibro(bookTitle);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Libro Eliminato");
+            alert.setHeaderText(bookTitle+" eliminato correttamente!");
+            alert.showAndWait();
+            bookTitle=null;
+            if(errorLabel.isVisible())
+                errorLabel.setVisible(false);
+            data.clear();
+            addrow();
+
+        }
+    }
+
+
+    @FXML
+    void refresh(ActionEvent event) {
+        data.clear();
+        addrow();
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
